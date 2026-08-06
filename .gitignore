@@ -101,6 +101,9 @@ dist
 # vitepress build output
 **/.vitepress/dist
 
+# Astro
+.astro/
+
 # vitepress cache directory
 **/.vitepress/cache
 
