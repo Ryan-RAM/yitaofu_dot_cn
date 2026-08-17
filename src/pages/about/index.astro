@@ -1,0 +1,106 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Timeline from "../../components/Timeline.astro";
+
+const education = [
+    {
+        date: "Incoming (26Fall)",
+        title: "Columbia University",
+        location: "New York, NY",
+        description: "Architecture | Master of Architecture",
+    },
+    {
+        date: "2021.09 - 2026.06",
+        title: "Guangdong University of Technology",
+        location: "Guangzhou, China",
+        description: "Architecture | Bachelor of Architecture",
+    },
+    {
+        date: "2022.09 - 2026.06",
+        title: "Guangdong University of Technology",
+        location: "Guangzhou, China",
+        description: "Computer Science (Minor) | Bachelor of Engineering",
+    },
+];
+const experience = [
+    {
+        date: "2026.06 - 2026.08",
+        title: "Ronald Lu & Partners",
+        location: "Guangzhou, China",
+        description: "Architectural Intern",
+    },
+    {
+        date: "2025.06 - 2025.10",
+        title: "Guangzhou City Construction & Development Co. Ltd",
+        location: "Guangzhou, China",
+        description: "Architectural Intern",
+    },
+];
+---
+<Layout title="About | Ryan Fu">
+    <section class="page">
+        <h1>
+            About
+        </h1>
+        <p>
+            Ryan (Yitao Fu)is an architectural designer and computational design researcher exploring the intersection of architecture, computation, and emerging technologies. Born in Guangzhou, China, he has a strong interest in interdisciplinary research between technology and architecture, aiming to generate innovative human-centered design solutions.
+        </p>
+        <p>
+            He holds a Bachelor of Architecture from Guangdong University of Technology, where he also completed a minor in Computer Science and earned a Bachelor of Engineering degree (minor). He will pursue the Master of Architecture program at Columbia University’s Graduate School of Architecture, Planning and Preservation (GSAPP).
+        </p>
+        <div class="links">
+            <a href="https://www.linkedin.com/in/yitao-fu" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Ryan-RAM" target="_blank">Github</a>
+        </div>
+    </section>
+    <!-- Education -->
+    <section class="my-section">
+        <div class="section-label">
+            EDUCATION
+        </div>
+        <Timeline items={education} />
+    </section>
+    <section class="my-section">
+        <div class="section-label">
+            EXPERIENCE
+        </div>
+        <Timeline items={experience} />
+    </section>
+</Layout>
+
+<style>
+    .page {
+        max-width: 65%;
+        height: 90vh;
+    }
+    .page p {
+        font-size: 1.15rem;
+        line-height: 1.75;
+        color: var(--text-primary);
+        margin-top: 1rem;
+        text-align: justify;
+    }
+    .links {
+        display:flex;
+        gap:2rem;
+        margin-top:6rem;
+    }
+    .section-label {
+        font-size: 1.15rem;
+        letter-spacing: 0.1em;
+        font-weight: 400;
+        color: var(--accent);
+        margin-bottom: 2rem;
+    }
+    .my-section {
+        margin-bottom: 6rem;
+    }
+    .my-section:last child {
+        margin-bottom: 0;
+    }
+    @media (max-width: 700px) {
+        .page {
+            max-width: 100%;
+        }
+    }
+</style>

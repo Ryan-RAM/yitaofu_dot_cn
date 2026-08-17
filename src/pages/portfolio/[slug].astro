@@ -1,0 +1,168 @@
+---
+import ContentRenderer from "../../components/project/ContentRenderer.astro";
+
+
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+export async function getStaticPaths() {
+    const projects = await getCollection("projects");
+    return projects.map((project)=>({
+        params:{
+            slug: project.id
+        },
+        props:{
+            project
+        }
+    }));
+}
+const { project } = Astro.props;
+const { data } = project;
+---
+<Layout title={`${data.title} | Ryan Fu`} fullWidth={true}>
+    <section class="hero-container">
+        <img
+            class="hero-image"
+            src={data.hero || data.cover}
+            alt={data.title}
+        />
+        <div class="hero-overlay">
+            <h1>
+                {data.title}
+            </h1>
+            {
+                data.subtitle &&
+                <p>
+                    {data.subtitle}
+                </p>
+            }
+        </div>
+    </section>
+    <section class="project-detail">
+        <!-- Information -->
+        <section class="information">
+            <div>
+                <span>DATE</span>
+                <p>{data.date}</p>
+            </div>
+            <div>
+                <span>LOCATION</span>
+                <p>{data.location}</p>
+            </div>
+            <div>
+                <span>ADVISOR</span>
+                <p>{data.advisor}</p>
+            </div>
+            <div>
+                <span>COLLABORATOR</span>
+                {
+                    data.collaborator.map((collaborator)=>(
+                        <p>
+                            {collaborator}
+                        </p>
+                    ))
+                }
+            </div>
+        </section>
+        <!-- Overview -->
+        <section class="overview">
+            <h2>
+                Project Overview
+            </h2>
+            <div class="paragraph">
+            {
+                data.overview.map((paragraph)=>(
+                    <p>
+                        {paragraph}
+                    </p>
+                ))
+            }
+            </div>
+        </section>
+        <!-- Content Blocks -->
+        <ContentRenderer blocks={data.blocks}/>
+    </section>
+</Layout>
+
+<style>
+    .project-detail {
+        max-width:100%;
+        padding:0rem 10rem;
+    }
+    .hero-container {
+        position:relative;
+        width:100vw;
+        height:100vh;
+        margin-left:calc(50% - 50vw);
+        overflow:hidden;
+    }
+    .hero-container::after {
+        content:"";
+        position:absolute;
+        inset:0;
+        background:rgba(0,0,0,0.35);
+        z-index:1;
+    }
+    .hero-image {
+        width:100%;
+        height:100%;
+        object-fit:cover;
+    }
+    .hero-overlay {
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:
+        translate(-50%,-50%);
+        text-align:center;
+        z-index:2;
+        width:80%;
+    }
+    .hero-overlay h1 {
+        font-size:5rem;
+        letter-spacing:0.02em;
+        margin:0;
+    }
+    .hero-overlay p {
+        font-size:1.5rem;
+        letter-spacing:0.1em;
+        margin-top:1.5rem;
+    }
+    .information {
+        margin-top:5rem;
+        margin-bottom:6rem;
+        display:grid;
+        grid-template-columns:
+        repeat(4,1fr);
+        gap:3rem;
+        max-width:100%;
+    }
+    .information span {
+        font-size:1rem;
+        letter-spacing:0.1em;
+        color:var(--text-muted);
+    }
+    .information p {
+        margin-top:0.5rem;
+        color:var(--text-primary);
+        font-size:1.15rem;
+    }
+    .overview {
+        max-width:750px;
+        margin-top:5rem;
+        margin-bottom:8rem;
+    }
+    .overview h2 {
+        font-size:1.15rem;
+        letter-spacing:0.1em;
+        text-transform:uppercase;
+        margin-bottom:2rem;
+        color:var(--text-secondary);
+    }
+    .paragraph p {
+        margin-bottom: 1rem;
+        text-align: justify;
+    }
+    .paragraph p:last-child {
+        margin-bottom: 0;
+    }
+</style>

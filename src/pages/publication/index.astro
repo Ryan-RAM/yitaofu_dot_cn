@@ -1,0 +1,105 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const publications = await getCollection("publications");
+const sortedPublications = publications.sort((a, b) =>
+    b.data.date.localeCompare(a.data.date)
+);
+---
+<Layout title="Publication | Ryan Fu">
+    <section class="publication">
+        <h1>
+            Publication
+        </h1>
+        <div class="h1-note">
+            Selected research publications and academic work.
+        </div>
+        <div class="publication-list">
+            {
+                sortedPublications.map((publication) => (
+                    <article class="publication-item">
+                        <div class="publication-date">
+                            {publication.data.date}
+                        </div>
+                        <div class="publication-information">
+                            <h2>
+                                {publication.data.title}
+                            </h2>
+                            <p class="authors">
+                                {publication.data.authors.join(", ")}
+                            </p>
+                            <p class="venue">
+                                {publication.data.venue}
+                                {
+                                    publication.data.type && (
+                                        <> · {publication.data.type}</>
+                                    )
+                                }
+                            </p>
+                            {
+                                publication.data.paper_doi && (
+                                    <a
+                                        class="doi"
+                                        href={publication.data.paper_doi}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        DOI →
+                                    </a>
+                                )
+                            }
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .publication {
+        max-width: 100%;
+    }
+    .publication-list {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5rem;
+    }
+    .publication-item {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 4rem;
+        padding: 2.5rem 0;
+        border-top: 1px solid #333;
+    }
+    .publication-item:last-child {
+        border-bottom: 1px solid #333;
+    }
+    .publication-date {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+    }
+    .publication-information h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: var(--text-primary);
+    }
+    .authors {
+        margin-top: 1rem;
+        font-size: 1.15rem;
+        color: var(--text-primary);
+    }
+    .venue {
+        margin-top: 0rem;
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+    }
+    .doi {
+        display: inline-block;
+        margin-top: 1rem;
+        font-size: 1.15rem;
+        color: var(--accent);
+        font-weight: 600;
+    }
+</style>

@@ -1,0 +1,346 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const stories = await getCollection("stories");
+const news = await getCollection("news");
+const projects = await getCollection("projects");
+
+const coverStories = stories
+    .filter((story) => story.data.category === "Cover Story")
+    .sort((a, b) => b.data.date.localeCompare(a.data.date));
+const latestCoverStory = coverStories[0];
+const latestNews = news
+    .sort((a, b) => b.data.date.localeCompare(a.data.date))
+    .slice(0, 3);
+const latestProjects = projects
+    .sort((a, b) => b.data.date.localeCompare(a.data.date))
+    .slice(0, 3);
+---
+
+
+<Layout title="Ryan Fu" fullWidth={true}>
+    <!-- COVER STORY -->
+    {
+        latestCoverStory && (
+            <section class="cover-story">
+                <a href={`/story/${latestCoverStory.id}`}>
+                    <img
+                        src={latestCoverStory.data.cover}
+                        alt={latestCoverStory.data.title}
+                    />
+                    <div class="cover-overlay"></div>
+                    <div class="cover-information">
+                        <div class="cover-category">
+                            COVER STORY
+                        </div>
+                        <h1>
+                            {latestCoverStory.data.title}
+                        </h1>
+                        <div class="cover-date">
+                            {latestCoverStory.data.date}
+                        </div>
+                    </div>
+                </a>
+            </section>
+        )
+    }
+    <!-- WHAT'S NEW -->
+    <section class="whats-new">
+        <div class="section-header">
+            <h2>
+                What's New
+            </h2>
+            <a href="/news">
+                Read More →
+            </a>
+        </div>
+        <div class="news-list">
+            {
+                latestNews.map((item) => (
+                    <a
+                        class="news-item"
+                        href={`/news/${item.id}`}
+                    >
+                        <div class="news-date">
+                            {item.data.date}
+                        </div>
+                        <div class="news-title">
+                            {item.data.title}
+                        </div>
+                        {
+                            item.data.location && (
+                                <div class="news-location">
+                                    {item.data.location}
+                                </div>
+                            )
+                        }
+                    </a>
+                ))
+            }
+        </div>
+    </section>
+    <!-- SELECTED PORTFOLIO -->
+    <section class="selected-portfolio">
+        <div class="section-header">
+            <h2>
+                Selected Portfolio
+            </h2>
+            <a href="/portfolio">
+                View All →
+            </a>
+        </div>
+        <div class="project-grid">
+            {
+                latestProjects.map((project) => (
+                    <a
+                        class="project"
+                        href={`/portfolio/${project.id}`}
+                    >
+                        <div class="project-image">
+                            <img
+                                src={project.data.cover}
+                                alt={project.data.title}
+                            />
+                        </div>
+                        <div class="project-information">
+                            <h3>
+                                {project.data.title}
+                            </h3>
+                            <div>
+                                {project.data.date}
+                            </div>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
+    </section>
+</Layout>
+
+<style>
+    /* =========================
+       COVER STORY
+       ========================= */
+    .cover-story {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        min-height: 600px;
+        overflow: hidden;
+    }
+    .cover-story a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: inherit;
+    }
+    .cover-story img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .cover-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 1;
+    }
+    .cover-information {
+        position: absolute;
+        right: 5rem;
+        bottom: 4rem;
+        width: min(700px, 50%);
+        text-align: right;
+        z-index: 2;
+    }
+    .cover-category {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.18em;
+        color: var(--accent);
+        font-weight: 600;
+    }
+    .cover-information h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 5vw, 5rem);
+        line-height: 1.05;
+        font-weight: 300;
+        color: #fff;
+    }
+    .cover-date {
+        margin-top: 1rem;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    /* =========================
+       SECTION COMMON
+       ========================= */
+    .whats-new {
+        padding: 0 5rem;
+        margin: 7rem 0 7rem;
+    }
+    .selected-portfolio {
+        padding: 0 5rem;
+        margin: 7rem 0 7rem;
+    }
+    .section-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 3rem;
+        border-bottom: 1px solid #333;
+        padding-bottom: 1.25rem;
+    }
+    .section-header h2 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 300;
+    }
+    .section-header a {
+        font-size: 1.15rem;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        font-weight: 400;
+    }
+    /* =========================
+       WHAT'S NEW
+       ========================= */
+    .news-list {
+        display: flex;
+        flex-direction: column;
+    }
+    .news-item {
+        display: grid;
+        grid-template-columns: 180px 1fr 200px;
+        gap: 3rem;
+        padding: 1.75rem 0;
+        border-bottom: 1px solid #292929;
+        color: inherit;
+    }
+    .news-item:first-child {
+        border-top: 0px solid #292929;
+        margin-top: -3rem;
+    }
+    .news-date {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+    }
+    .news-title {
+        font-size: 1.5rem;
+        font-weight: 300;
+    }
+    .news-location {
+        text-align: right;
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+    }
+    .news-item:hover .news-title {
+        transition: 0.3s;
+        color: var(--accent);
+    }
+    /* =========================
+       SELECTED PORTFOLIO
+       ========================= */
+    .project-grid {
+        display: grid;
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+        gap: 4rem;
+    }
+    .project {
+        display: block;
+        color: inherit;
+    }
+    .project-image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: #222;
+    }
+    .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition:
+            transform 0.5s ease;
+    }
+    .project:hover .project-image img {
+        transform: scale(1.025);
+    }
+    .project-information {
+        margin-top: 1.25rem;
+    }
+    .project-information h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: var(--text-primary);
+    }
+    .project-information div {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+    }
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (max-width: 900px) {
+        .cover-story {
+            height: 75vh;
+        }
+        .cover-information {
+            right: 2rem;
+            bottom: 2rem;
+            width: 70%;
+        }
+        .news-item {
+            grid-template-columns: 120px 1fr;
+            gap: 1.5rem;
+        }
+        .news-location {
+            display: none;
+        }
+        .project-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    @media (max-width: 600px) {
+        .cover-story {
+            height: 70vh;
+            min-height: 500px;
+        }
+        .cover-information {
+            left: 1.5rem;
+            right: 1.5rem;
+            bottom: 2rem;
+            width: auto;
+            text-align: left;
+        }
+        .cover-information h1 {
+            font-size: 2.5rem;
+        }
+        .whats-new,
+        .selected-portfolio {
+            padding: 7rem 5rem 8rem;
+        }
+        .section-header h2 {
+            font-size: 1.8rem;
+        }
+        .section-header a {
+            font-size: 0.8rem;
+        }
+        .news-item {
+            grid-template-columns: 1fr;
+            gap: 0.4rem;
+        }
+        .news-title {
+            font-size: 1.15rem;
+        }
+        .project-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+    }
+</style>

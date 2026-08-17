@@ -1,17 +1,57 @@
 ---
-
+import "../styles/global.css";
 ---
-
+<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Ryan Fu</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<main class="entry">
+			<div class="identity">
+				<h1>
+					Ryan Fu
+				</h1>
+				<p>
+					Architecture × Computation
+				</p>
+			</div>
+			<a class="enter" href="/home">
+				ENTER →
+			</a>
+		</main>
 	</body>
 </html>
+
+<style>
+    .entry {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--background);
+        color: var(--text-primary);
+    }
+    .identity {
+        text-align: center;
+    }
+    .identity h1 {
+        margin: 0;
+    }
+    .identity p {
+        margin-top: 1rem;
+        color: var(--text-secondary);
+    }
+    .enter {
+        margin-top: 5rem;
+        color: var(--accent);
+        font-size: 1rem;
+        letter-spacing: 0.15em;
+    }
+    .enter:hover {
+        color: var(--text-primary);
+    }
+</style>

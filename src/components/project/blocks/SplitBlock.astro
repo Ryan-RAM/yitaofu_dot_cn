@@ -1,0 +1,56 @@
+---
+const {
+    image,
+    content,
+    title
+}=Astro.props;
+---
+<section class="split">
+    <div class="image">
+        <img 
+        src={image}
+        alt=""
+        />
+    </div>
+    <div class="text">
+        {
+            title &&
+            <h3>
+                {title}
+            </h3>
+        }
+        <p>
+            {content}
+        </p>
+    </div>
+</section>
+
+<style>
+    .split{
+        display:grid;
+        grid-template-columns:
+        0.618fr 1fr;
+        gap:4rem;
+        align-items:center;
+        margin:10rem 0;
+    }
+    img{
+        width:100%;
+        display:block;
+    }
+    h3{
+        font-size:1.15rem;
+        letter-spacing:0.1em;
+        text-transform:uppercase;
+        margin-bottom:2rem;
+        color:var(--text-secondary);
+    }
+    p{
+        text-align: justify;
+    }
+    @media(max-width:900px){
+        .split{
+            grid-template-columns:1fr;
+        }
+    }
+</style>

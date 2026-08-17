@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const { title="Ryan Fu", fullWidth=false} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header />
+    <main class:list={[fullWidth && "fullWidth"]}>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+  <style>
+    main {
+      min-height: 70vh;
+      padding: 3rem 10rem;
+      box-sizing:border-box;
+    }
+    main.fullWidth {
+      padding:0;
+    }
+  </style>
+</html>

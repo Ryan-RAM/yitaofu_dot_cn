@@ -1,0 +1,81 @@
+<header id="site-header">
+  <nav>
+    <a href="/home">Home</a>
+    <div class="nav-links">
+      <a href="/portfolio">Portfolio</a>
+      <a href="/publication">Publication</a>
+      <a href="/story">Story</a>
+      <a href="/about">About</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 3rem 5rem;
+    box-sizing: border-box;
+    z-index: 10;
+    transition: transform 0.3s ease;
+  }
+  header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 12rem;
+    background: linear-gradient(
+      to bottom,
+      rgba(20, 20, 20, 0.75) 0%,
+      rgba(20, 20, 20, 0.55) 20%,
+      rgba(20, 20, 20, 0.25) 55%,
+      rgba(20, 20, 20, 0) 100%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+  header.hidden {
+    transform: translateY(-100%);
+  }
+  a {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+  }
+</style>
+
+<script>
+  const header = document.querySelector("#site-header");
+  let lastScrollY = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+    // 页面最顶部：始终显示
+    if (currentScrollY <= 10) {
+      header?.classList.remove("hidden");
+    }
+    // 向下滚动：隐藏
+    else if (currentScrollY > lastScrollY) {
+      header?.classList.add("hidden");
+    }
+    // 向上滚动：显示
+    else if (currentScrollY < lastScrollY) {
+      header?.classList.remove("hidden");
+    }
+    lastScrollY = currentScrollY;
+  });
+</script>

@@ -1,0 +1,31 @@
+---
+const {title, content}=Astro.props;
+---
+<section class="text-block">
+    {
+        title &&
+        <h3>
+            {title}
+        </h3>
+    }
+    <p>
+        {content}
+    </p>
+</section>
+
+<style>
+    .text-block{
+        margin:8rem 0;
+        max-width:900px;
+    }
+    h3{
+        font-size:1.15rem;
+        letter-spacing:0.1em;
+        text-transform:uppercase;
+        margin-bottom:2rem;
+        color:var(--text-secondary);
+    }
+    p{
+        text-align: justify;
+    }
+</style>

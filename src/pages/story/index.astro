@@ -1,0 +1,182 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const stories = await getCollection("stories");
+
+const sortedStories = stories.sort((a, b) =>
+    b.data.date.localeCompare(a.data.date)
+);
+
+const coverStories = sortedStories.filter(
+    (story) => story.data.category === "Cover Story"
+);
+const researchStories = sortedStories.filter(
+    (story) => story.data.category === "Research"
+);
+const fieldNotes = sortedStories.filter(
+    (story) => story.data.category === "Field Note"
+);
+---
+<Layout title="Stories | Ryan Fu">
+    <section class="stories">
+        <h1>
+            Story
+        </h1>
+        <div class="h1-note">
+            Writings, research and field notes.
+        </div>
+        <section class="story-section">
+            <div class="section-label">
+                COVER STORY
+            </div>
+            <div class="story-list">
+                {
+                    coverStories.map((story) => (
+                        <article class="story-item">
+                            <div class="story-date">
+                                {story.data.date}
+                            </div>
+                            <div class="story-information">
+                                <a href={`/story/${story.id}`}>
+                                    <h2>
+                                        {story.data.title}
+                                    </h2>
+                                </a>
+                                <p>
+                                    {story.data.intro}
+                                </p>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+        <section class="story-section">
+            <div class="section-label">
+                RESEARCH
+            </div>
+            <div class="story-list">
+                {
+                    researchStories.map((story) => (
+                        <article class="story-item">
+                            <div class="story-date">
+                                {story.data.date}
+                            </div>
+                            <div class="story-information">
+                                <a href={`/story/${story.id}`}>
+                                    <h2>
+                                        {story.data.title}
+                                    </h2>
+                                </a>
+                                <p>
+                                    {story.data.intro}
+                                </p>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+        <section class="story-section">
+            <div class="section-label">
+                FIELD NOTE
+            </div>
+            <div class="story-list">
+                {
+                    fieldNotes.map((story) => (
+                        <article class="story-item">
+                            <div class="story-date">
+                                {story.data.date}
+                            </div>
+                            <div class="story-information">
+                                <a href={`/story/${story.id}`}>
+                                    <h2>
+                                        {story.data.title}
+                                    </h2>
+                                </a>
+                                <p>
+                                    {story.data.intro}
+                                </p>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+    </section>
+</Layout>
+
+<style>
+    .stories {
+        max-width: 100%;
+    }
+    .section-label {
+        font-size: 1.15rem;
+        letter-spacing: 0.1em;
+        font-weight: 400;
+        color: var(--accent);
+        margin-bottom: 2rem;
+    }
+    .cover-story {
+        margin-top: 5rem;
+        margin-bottom: 8rem;
+    }
+    .cover-story a {
+        display: block;
+    }
+    .cover-image {
+        width: 100%;
+        aspect-ratio: 16 / 7;
+        overflow: hidden;
+    }
+    .cover-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .cover-information {
+        margin-top: 2rem;
+        max-width: 800px;
+    }
+    .story-date {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+    }
+    .cover-information h2 {
+        margin-top: 0.5rem;
+        font-size: 2.5rem;
+    }
+    .cover-information p {
+        margin-top: 1rem;
+        max-width: 700px;
+        color: var(--text-secondary);
+    }
+    .story-section {
+        margin-top: 6rem;
+    }
+    .story-list {
+        display: flex;
+        flex-direction: column;
+    }
+    .story-item {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 4rem;
+        padding: 2rem 0;
+        border-top: 1px solid #333;
+    }
+    .story-item:last-child {
+        border-bottom: 1px solid #333;
+    }
+    .story-information h2 {
+        font-size: 1.5rem;
+        font-weight: 300;
+    }
+    .story-information p {
+        margin-top: 0.75rem;
+        width: 100%;
+        color: var(--text-primary);
+        text-align: justify;
+    }
+</style>
