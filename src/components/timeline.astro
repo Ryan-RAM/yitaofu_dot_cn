@@ -1,0 +1,82 @@
+---
+export interface TimelineItem {
+    date: string;
+    title: string;
+    location?: string;
+    description?: string;
+}
+interface Props {
+    items: TimelineItem[];
+}
+const { items } = Astro.props;
+---
+<div class="timeline">
+    {items.map((item) => (
+        <div class="item">
+            <div class="date">
+                {item.date}
+            </div>
+            <div class="content">
+                <h2>{item.title}</h2>
+                {item.location && (
+                    <div class="location">
+                        {item.location}
+                    </div>
+                )}
+                {item.description && (
+                    <p>{item.description}</p>
+                )}
+            </div>
+        </div>
+    ))}
+</div>
+
+<style>
+    .timeline {
+        width: 100%;
+    }
+    .item {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 4rem;
+        padding: 2rem 0;
+        border-top: 1px solid #333;
+    }
+    .item:last-child {
+        border-bottom: 1px solid #333;
+    }
+    .date {
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+    .content :global(h2) {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 300;
+    }
+    .location {
+        margin-top: 1rem;
+        margin-bottom: 0;
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+    }
+    .content p {
+        margin-top: 1rem;
+        margin-bottom: 0;
+        font-size: 1.15rem;
+        color: var(--text-primary);
+    }
+    @media (max-width: 700px) {
+        .item {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+        .date {
+            font-size: 1rem;
+        }
+        .content h2 {
+            font-size: 1.3rem;
+        }
+    }
+</style>

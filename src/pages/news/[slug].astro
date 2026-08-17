@@ -1,0 +1,113 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+    const news = await getCollection("news");
+
+    return news.map((item) => ({
+        params: {
+            slug: item.id,
+        },
+        props: {
+            item,
+        },
+    }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+<Layout title={`${item.data.title} | Ryan Fu`}>
+    <article class="news-detail">
+        <header>
+            <div class="news-date">
+                {item.data.date}
+            </div>
+            <h1>
+                {item.data.title}
+            </h1>
+            {
+                item.data.location && (
+                    <div class="news-location">
+                        {item.data.location}
+                    </div>
+                )
+            }
+        </header>
+        <div class="news-content">
+            <Content />
+        </div>
+        {
+            item.data.related_project && (
+                <div class="related">
+                    <a href={`/portfolio/${item.data.related_project}`}>
+                        Related Project →
+                    </a>
+                </div>
+            )
+        }
+        {
+            item.data.external_link && (
+                <div class="external">
+                    <a
+                        href={item.data.external_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        External Link →
+                    </a>
+                </div>
+            )
+        }
+
+    </article>
+</Layout>
+<style>
+    .news-detail {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    header {
+        margin-bottom: 5rem;
+    }
+    .news-date {
+        font-size: 1rem;
+        color: var(--text-muted);
+    }
+    header h1 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 3.5rem;
+        font-weight: 300;
+        line-height: 1.2;
+    }
+    .news-location {
+        color: var(--text-secondary);
+        font-size: 1rem;
+    }
+    .news-content {
+        font-size: 1.15rem;
+        line-height: 1.9;
+    }
+    .news-content p {
+        margin-bottom: 1.5rem;
+    }
+    .news-content h2 {
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+    }
+    .related,
+    .external {
+        margin-top: 3rem;
+    }
+    .related a,
+    .external a {
+        color: var(--accent);
+    }
+    @media (max-width: 768px) {
+        header h1 {
+            font-size: 2.5rem;
+        }
+    }
+</style>

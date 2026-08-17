@@ -1,0 +1,190 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const projects = await getCollection("projects");
+const sortedProjects = [...projects].sort((a, b) => {
+    const dateA = Number(a.data.date.replace(".", ""));
+    const dateB = Number(b.data.date.replace(".", ""));
+    return dateB - dateA;
+});
+const categories = [
+    "All",
+    "Architecture",
+    "Computational Design",
+    "Research"
+];
+---
+<Layout title="Portfolio | Ryan Fu">
+    <section class="portfolio">
+        <h1>
+            Portfolio
+        </h1>
+        <div class="h1-note">
+            Selected architectural projects, computational design experiments and research explorations.
+        </div>
+        <div class="filter">
+        {
+            categories.map((category)=>(
+                <button class="filter-button" data-filter={category}>
+                    {category}
+                </button>
+            ))
+        }
+        </div>
+        <div class="project-list">
+        {
+            sortedProjects.map((project) => (
+                <a class="project-card" data-type={project.data.types.join(",")}a href={`/portfolio/${project.id}`}>
+                    <div class="image-container">
+                        <img
+                            src={project.data.cover}
+                            alt={project.data.title}
+                        />
+                    </div>
+                    <div class="information">
+                        <h2>
+                            {project.data.title}
+                        </h2>
+                        <h3>
+                            {project.data.subtitle}
+                        </h3>
+                        <p>
+                            {project.data.date}
+                            <br>
+                            {project.data.location}
+                        </p>
+                        <div class="types">
+                        {
+                            project.data.types.map((type)=>(
+                                <span>
+                                    {type}
+                                </span>
+                            ))
+                        }
+                        </div>
+                    </div>
+                </a>
+            ))
+        }
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .portfolio {
+        max-width: 100%;
+    }
+    .project-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4rem 4rem;
+        margin-top: 4rem;
+    }
+    .project-card {
+        display:block;
+    }
+    .image-container {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: #222;
+    }
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+    .project-card:hover .image-container img {
+        transform: scale(1.025);
+    }
+    .information a {
+        text-decoration:none;
+        color:inherit;
+    }
+    .information {
+        margin-top: 1.25rem;
+    }
+    .information h2 {
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin: 0;
+    }
+    .information h3 {
+        font-size: 1.15rem;
+        font-weight: 300;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+        margin-bottom: 1rem;
+    }
+    .information p {
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    .types {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+    .types span {
+        font-size: 1.15rem;
+        font-weight: 300;
+        color: var(--accent);
+    }
+    .filter {
+        display:flex;
+        gap:3rem;
+        margin-top:4rem;
+        margin-bottom:5rem;
+    }
+    .filter-button {
+        background:none;
+        border:none;
+        font-size:1rem;
+        letter-spacing:0.15em;
+        color:var(--text-primary);
+        cursor:pointer;
+    }
+    .filter-button:hover {
+        color:var(--accent);
+    }
+    .filter-button.active {
+        color:var(--accent);
+        font-weight:500;
+    }
+    @media (max-width: 900px) {
+
+        .project-list {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+    }
+    @media (max-width: 600px) {
+        .project-list {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+    }
+</style>
+
+<script>
+    const buttons = document.querySelectorAll(".filter-button");
+    const projects = document.querySelectorAll(".project-card");
+    buttons.forEach(button=>{
+        button.addEventListener("click", ()=>{
+            const filter = button.dataset.filter;
+            projects.forEach(project=>{
+                const types = project.dataset.type;
+                if(filter==="All" || types.includes(filter)) {
+                    project.style.display="grid";
+                }
+                else {
+                    project.style.display="none";
+                }
+            });
+        });
+    });
+</script>

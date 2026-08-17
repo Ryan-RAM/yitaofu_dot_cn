@@ -1,0 +1,174 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+    const stories = await getCollection("stories");
+    return stories.map((story) => ({
+        params: {
+            slug: story.id,
+        },
+        props: {
+            story,
+        },
+    }));
+}
+
+const { story } = Astro.props;
+const { Content } = await render(story);
+---
+<Layout title={`${story.data.title} | Ryan Fu`}>
+    <article class="story">
+        <!-- Hero -->
+        <div class="story-hero">
+            <img
+                src={story.data.cover}
+                alt={story.data.title}
+            />
+        </div>
+        <!-- Story Header -->
+        <header class="story-header">
+            <div class="story-category">
+                {story.data.category}
+            </div>
+            <h1>
+                {story.data.title}
+            </h1>
+            <div class="story-meta">
+                <span>{story.data.date}</span>
+                {
+                    story.data.location && (
+                        <>
+                            <span class="separator">·</span>
+                            <span>{story.data.location}</span>
+                        </>
+                    )
+                }
+            </div>
+            <p class="story-intro">
+                {story.data.intro}
+            </p>
+        </header>
+        <!-- Article -->
+        <div class="story-content">
+            <Content />
+        </div>
+    </article>
+</Layout>
+
+<style>
+    .story {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    /* =========================
+       Hero
+       ========================= */
+    .story-hero {
+        width: 100%;
+        overflow: hidden;
+        margin-top: 6rem;
+    }
+    .story-hero img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    /* =========================
+       Header
+       ========================= */
+    .story-header {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+        line-height: 1;
+    }
+    .story-category {
+        font-size: 1rem;
+        letter-spacing: 0.1em;
+        font-weight: 400;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+    }
+    .story-header h1 {
+        margin: 0;
+        font-size: 3.5rem;
+        font-weight: 300;
+        letter-spacing: 0;
+        color: var(--text-primary);
+    }
+    .story-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+    }
+    .separator {
+        color: var(--text-secondary);
+    }
+    .story-intro {
+        margin-top: 1.5rem;
+        font-size: 1.15rem;
+        color: var(--text-primary);
+    }
+    /* =========================
+       Article Content
+       ========================= */
+    .story-content {
+        font-size: 1.15rem;
+        color: var(--text-primary);
+    }
+    .story-content :global(h2) {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        font-weight: 300;
+        color: var(--text-primary);
+    }
+    .story-content :global(h3) {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: var(--text-primary);
+    }
+    .story-content :global(p) {
+        margin-bottom: 1.5rem;
+        text-align: justify;
+    }
+    .story-content :global(img) {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .story-content :global(blockquote) {
+        margin: 1.5rem 0;
+        padding-left: 2rem;
+        border-left: 2px solid var(--accent);
+        color: var(--text-secondary);
+    }
+    /* =========================
+       Mobile
+       ========================= */
+    @media (max-width: 768px) {
+        .story-header {
+            margin-top: 3rem;
+            margin-bottom: 4rem;
+        }
+        .story-header h1 {
+            font-size: 2.5rem;
+        }
+        .story-intro {
+            font-size: 1.1rem;
+        }
+        .story-content {
+            font-size: 1.15rem;
+        }
+    }
+</style>

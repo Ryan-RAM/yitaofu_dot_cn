@@ -1,0 +1,28 @@
+---
+const {
+    images=[]
+}=Astro.props;
+---
+<section class="gallery">
+    {
+        images.map((image)=>(
+            <img 
+                src={image}
+                alt=""
+            />
+        ))
+    }
+</section>
+
+<style>
+    .gallery{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:2rem;
+        margin:8rem 0;
+    }
+    .gallery img{
+        width:100%;
+        display:block;
+    }
+</style>

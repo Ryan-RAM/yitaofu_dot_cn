@@ -1,0 +1,24 @@
+---
+import TextBlock from "./blocks/TextBlock.astro";
+import ImageBlock from "./blocks/ImageBlock.astro";
+import GalleryBlock from "./blocks/GalleryBlock.astro";
+import SplitBlock from "./blocks/SplitBlock.astro";
+
+const { blocks=[] } = Astro.props;
+---
+{
+    blocks.map((block)=>{
+        switch(block.type){
+            case "text":
+                return <TextBlock {...block}/>
+            case "image":
+                return <ImageBlock {...block}/>
+            case "gallery":
+                return <GalleryBlock {...block}/>
+            case "split":
+                return <SplitBlock {...block}/>
+            default:
+                return null;
+        }
+    })
+}
