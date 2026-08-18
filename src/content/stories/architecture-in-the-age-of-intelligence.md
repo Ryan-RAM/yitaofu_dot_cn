@@ -1,4 +1,4 @@
----
+﻿---
 
 title: "Architecture in the Age of Intelligence"
 
@@ -8,7 +8,7 @@ category: Cover Story
 
 location: Guangzhou, China
 
-cover: "/images/stories/2026-08.png"
+cover: "/images/web/stories/2026-08.webp"
 
 intro:
   An exploration of how computational thinking and artificial intelligence may reshape architectural practice.

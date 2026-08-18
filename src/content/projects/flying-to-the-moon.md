@@ -1,4 +1,4 @@
----
+﻿---
 
 title: Flying to the Moon
 
@@ -12,7 +12,7 @@ types:
   - Architecture
   - Computational Design
 
-cover: "/images/projects/flying-to-the-moon/cover.png"
+cover: "/images/web/projects/flying-to-the-moon/cover.webp"
 
 role: Designer
 
@@ -39,7 +39,7 @@ blocks:
 
   - type: image
 
-    src: "/images/projects/flying-to-the-moon/main-perspective.png"
+    src: "/images/web/projects/flying-to-the-moon/main-perspective.webp"
 
     caption:
       Main Perspective
@@ -47,7 +47,7 @@ blocks:
   - type: split
 
     image:
-      "/images/projects/flying-to-the-moon/unit-design.png"
+      "/images/web/projects/flying-to-the-moon/unit-design.webp"
 
     title:
       Unit Design
@@ -58,11 +58,11 @@ blocks:
 
     images:
 
-      - "/images/projects/flying-to-the-moon/render-1.png"
+      - "/images/web/projects/flying-to-the-moon/render-1.webp"
 
-      - "/images/projects/flying-to-the-moon/render-2.png"
+      - "/images/web/projects/flying-to-the-moon/render-2.webp"
 
-      - "/images/projects/flying-to-the-moon/render-3.png"
+      - "/images/web/projects/flying-to-the-moon/render-3.webp"
 
 ---
 

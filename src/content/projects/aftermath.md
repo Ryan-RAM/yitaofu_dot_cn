@@ -1,4 +1,4 @@
----
+﻿---
 
 title: AfterMATH
 
@@ -12,7 +12,7 @@ types:
   - Architecture
   - Computational Design
 
-cover: "/images/projects/aftermath/cover.png"
+cover: "/images/web/projects/aftermath/cover.webp"
 
 role: Designer
 
@@ -42,22 +42,22 @@ blocks:
 
     images:
 
-      - "/images/projects/aftermath/render-1.png"
+      - "/images/web/projects/aftermath/render-1.webp"
 
-      - "/images/projects/aftermath/render-2.png"
+      - "/images/web/projects/aftermath/render-2.webp"
 
-      - "/images/projects/aftermath/render-3.png"
+      - "/images/web/projects/aftermath/render-3.webp"
 
   - type: text
 
     title: Location
 
-    content: The site for this project is located on the coast of Tokyo, Japan -- an area severely affected by tsunamis and highly vulnerable to such disasters. When a tsunami inundates the ground level, high-rise buildings become isolated islands, severely hampering rescue operations—a challenge that has consistently plagued disaster relief efforts in the past.
+    content: The site for this project is located on the coast of Tokyo, Japan -- an area severely affected by tsunamis and highly vulnerable to such disasters. When a tsunami inundates the ground level, high-rise buildings become isolated islands, severely hampering rescue operations鈥攁 challenge that has consistently plagued disaster relief efforts in the past.
 
   - type: split
 
     image:
-      "/images/projects/aftermath/equipment-system.png"
+      "/images/web/projects/aftermath/equipment-system.webp"
 
     title:
       System & Strategy
@@ -68,15 +68,15 @@ blocks:
 
     images:
 
-      - "/images/projects/aftermath/detail-1.png"
+      - "/images/web/projects/aftermath/detail-1.webp"
 
-      - "/images/projects/aftermath/detail-2.png"
+      - "/images/web/projects/aftermath/detail-2.webp"
 
-      - "/images/projects/aftermath/detail-3.png"
+      - "/images/web/projects/aftermath/detail-3.webp"
 
   - type: image
 
-    src: "/images/projects/aftermath/main-perspective.png"
+    src: "/images/web/projects/aftermath/main-perspective.webp"
 
     caption:
       Main Perspective

@@ -21,19 +21,20 @@ const { Content } = await render(item);
 <Layout title={`${item.data.title} | Ryan Fu`}>
     <article class="news-detail">
         <header>
-            <div class="news-date">
-                {item.data.date}
-            </div>
             <h1>
                 {item.data.title}
             </h1>
-            {
-                item.data.location && (
-                    <div class="news-location">
-                        {item.data.location}
-                    </div>
-                )
-            }
+            <div class="news-meta">
+                <span>{item.data.date}</span>
+                {
+                    item.data.location && (
+                        <>
+                            <span class="separator">·</span>
+                            <span>{item.data.location}</span>
+                        </>
+                    )
+                }
+            </div>
         </header>
         <div class="news-content">
             <Content />
@@ -63,29 +64,43 @@ const { Content } = await render(item);
 
     </article>
 </Layout>
+
 <style>
+    /* =========================
+       Header
+       ========================= */
     .news-detail {
         max-width: 800px;
-        margin: 0 auto;
+        margin-top: 6rem;
     }
     header {
-        margin-bottom: 5rem;
+        margin-bottom: 4rem;
     }
     .news-date {
         font-size: 1rem;
         color: var(--text-muted);
     }
     header h1 {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+        margin: 0;
         font-size: 3.5rem;
         font-weight: 300;
-        line-height: 1.2;
+        letter-spacing: 0;
+        color: var(--text-primary);
     }
-    .news-location {
+    .news-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        font-size: 1.15rem;
         color: var(--text-secondary);
-        font-size: 1rem;
     }
+    .separator {
+        color: var(--text-secondary);
+    }
+    /* =========================
+       Content
+       ========================= */
     .news-content {
         font-size: 1.15rem;
         line-height: 1.9;

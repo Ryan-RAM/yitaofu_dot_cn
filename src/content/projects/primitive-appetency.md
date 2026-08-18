@@ -1,4 +1,4 @@
----
+﻿---
 
 title: Primitive Appetency
 
@@ -11,7 +11,7 @@ location: Guangzhou, China
 types:
   - Architecture
 
-cover: "/images/projects/primitive-appetency/cover.png"
+cover: "/images/web/projects/primitive-appetency/cover.webp"
 
 role: Designer
 
@@ -41,16 +41,16 @@ blocks:
 
     images:
 
-      - "/images/projects/primitive-appetency/render-1.png"
+      - "/images/web/projects/primitive-appetency/render-1.webp"
 
-      - "/images/projects/primitive-appetency/render-4.png"
+      - "/images/web/projects/primitive-appetency/render-4.webp"
 
-      - "/images/projects/primitive-appetency/render-5.png"
+      - "/images/web/projects/primitive-appetency/render-5.webp"
 
   - type: split
 
     image:
-      "/images/projects/primitive-appetency/process.png"
+      "/images/web/projects/primitive-appetency/process.webp"
 
     title:
       Design Concept
@@ -65,18 +65,14 @@ blocks:
 
   - type: image
 
-    src: "/images/projects/primitive-appetency/acoustic.png"
+    src: "/images/web/projects/primitive-appetency/acoustic.webp"
 
     caption:
       Audience Layouts and the Acoustic Simulation
 
-  - type: split
+  - type: text
 
-    image:
-      "/images/projects/primitive-appetency/ryan.png"
-
-    title:
-      Elevation Design
+    title: Elevation Design
 
     content: Rather than blindly pursuing architectural form, this design extracts the order and relationships of the campus' existing volumes into a design grammar. Through structured geometric transformations, this grammar is redistributed into new functions, new circulation routes, and public beneficiaries. In this proposal, form derives from the site rather than expressing itself. Structure and function determine the details of the form, while governance determines whether the form can survive long-term.
 
@@ -90,11 +86,11 @@ blocks:
 
     images:
 
-      - "/images/projects/primitive-appetency/render-2.png"
+      - "/images/web/projects/primitive-appetency/render-2.webp"
 
-      - "/images/projects/primitive-appetency/render-3.png"
+      - "/images/web/projects/primitive-appetency/render-3.webp"
 
-      - "/images/projects/primitive-appetency/render-6.png"
+      - "/images/web/projects/primitive-appetency/render-6.webp"
 
 ---
 

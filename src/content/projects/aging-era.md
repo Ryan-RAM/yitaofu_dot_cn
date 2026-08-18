@@ -11,7 +11,7 @@ location: Guangzhou, China
 types:
   - Architecture
 
-cover: "/images/projects/aging-era/cover.png"
+cover: "/images/web/projects/aging-era/cover.webp"
 
 role: Designer
 
@@ -39,16 +39,16 @@ blocks:
 
     images:
 
-      - "/images/projects/aging-era/render-1.png"
+      - "/images/web/projects/aging-era/render-1.webp"
 
-      - "/images/projects/aging-era/render-2.png"
+      - "/images/web/projects/aging-era/render-2.webp"
 
-      - "/images/projects/aging-era/render-3.png"
+      - "/images/web/projects/aging-era/render-3.webp"
 
   - type: split
 
     image:
-      "/images/projects/aging-era/concept.png"
+      "/images/web/projects/aging-era/concept.webp"
 
     title:
       Concept
@@ -63,7 +63,7 @@ blocks:
 
   - type: image
 
-    src: "/images/projects/aging-era/strategies.png"
+    src: "/images/web/projects/aging-era/strategies.webp"
 
     caption:
       "Strategies: Interpreting urban morphologies to the building. (Left to right: Los Angles, Rome, Venice, Rio de Janeiro, Cambridge, Rome)"
@@ -71,7 +71,7 @@ blocks:
   - type: split
 
     image:
-      "/images/projects/aging-era/floor-plan.png"
+      "/images/web/projects/aging-era/floor-plan.webp"
 
     title:
       Functions Arrangement and Floor Plans
@@ -80,7 +80,7 @@ blocks:
 
   - type: image
 
-    src: "/images/projects/aging-era/sections.png"
+    src: "/images/web/projects/aging-era/sections.webp"
 
     caption:
       Sections
