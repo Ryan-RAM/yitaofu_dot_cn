@@ -1,0 +1,71 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Prepare SSH
+        shell: bash
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          printf '%s\n' "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Upload production files
+        shell: bash
+        run: |
+          ssh \
+            -i ~/.ssh/deploy_key \
+            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}" \
+            "rm -rf /tmp/yitaofu-deploy && mkdir -p /tmp/yitaofu-deploy"
+
+          scp -r \
+            -i ~/.ssh/deploy_key \
+            dist/. \
+            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/tmp/yitaofu-deploy/"
+
+      - name: Activate deployment
+        shell: bash
+        run: |
+          ssh \
+            -i ~/.ssh/deploy_key \
+            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}" \
+            "rm -rf '${{ secrets.SERVER_PATH }}.new' && \
+             mkdir -p '${{ secrets.SERVER_PATH }}.new' && \
+             cp -a /tmp/yitaofu-deploy/. '${{ secrets.SERVER_PATH }}.new/' && \
+             rm -rf '${{ secrets.SERVER_PATH }}.old' && \
+             mv '${{ secrets.SERVER_PATH }}' '${{ secrets.SERVER_PATH }}.old' && \
+             mv '${{ secrets.SERVER_PATH }}.new' '${{ secrets.SERVER_PATH }}' && \
+             rm -rf '${{ secrets.SERVER_PATH }}.old' /tmp/yitaofu-deploy"
