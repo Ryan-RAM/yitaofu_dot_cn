@@ -1,3 +1,4 @@
+
 name: Deploy to Production
 
 on:
@@ -36,6 +37,8 @@ jobs:
       - name: Prepare SSH
         shell: bash
         run: |
+          set -euo pipefail
+
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
 
@@ -44,7 +47,20 @@ jobs:
 
           ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Upload production files
+      - name: Package production files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tar -czf deploy.tar.gz -C dist .
+
+          echo "Archive size:"
+          ls -lh deploy.tar.gz
+
+          echo "Files included in archive:"
+          tar -tzf deploy.tar.gz | wc -l
+
+      - name: Upload production archive
         timeout-minutes: 10
         shell: bash
         run: |
@@ -58,30 +74,85 @@ jobs:
             -o ServerAliveCountMax=3
           )
 
-          echo "Step 1: Preparing remote temporary directory..."
-          ssh "${SSH_OPTS[@]}" \
-            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}" \
-            "rm -rf /tmp/yitaofu-deploy && mkdir -p /tmp/yitaofu-deploy"
+          REMOTE="${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}"
 
-          echo "Step 2: Uploading production files..."
-          scp -v \
-            "${SSH_OPTS[@]}" \
-            -r \
-            dist/. \
-            "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/tmp/yitaofu-deploy/"
+          echo "Preparing remote upload..."
+          ssh "${SSH_OPTS[@]}" "$REMOTE" \
+            "rm -f /tmp/yitaofu-deploy.tar.gz && \
+             rm -rf /tmp/yitaofu-deploy && \
+             mkdir -p /tmp/yitaofu-deploy"
 
-          echo "Upload completed."
+          echo "Uploading one archive..."
+          scp "${SSH_OPTS[@]}" \
+            deploy.tar.gz \
+            "$REMOTE:/tmp/yitaofu-deploy.tar.gz"
+
+          echo "Verifying uploaded archive..."
+          ssh "${SSH_OPTS[@]}" "$REMOTE" \
+            "test -s /tmp/yitaofu-deploy.tar.gz && \
+             tar -tzf /tmp/yitaofu-deploy.tar.gz > /dev/null"
+
+          echo "Archive upload and integrity check passed."
 
       - name: Activate deployment
+        timeout-minutes: 5
         shell: bash
         run: |
-          ssh \
-            -i ~/.ssh/deploy_key \
+          set -euo pipefail
+
+          SSH_OPTS=(
+            -i ~/.ssh/deploy_key
+            -o BatchMode=yes
+            -o ConnectTimeout=15
+            -o ServerAliveInterval=30
+            -o ServerAliveCountMax=3
+          )
+
+          ssh "${SSH_OPTS[@]}" \
             "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}" \
-            "rm -rf '${{ secrets.SERVER_PATH }}.new' && \
-             mkdir -p '${{ secrets.SERVER_PATH }}.new' && \
-             cp -a /tmp/yitaofu-deploy/. '${{ secrets.SERVER_PATH }}.new/' && \
-             rm -rf '${{ secrets.SERVER_PATH }}.old' && \
-             mv '${{ secrets.SERVER_PATH }}' '${{ secrets.SERVER_PATH }}.old' && \
-             mv '${{ secrets.SERVER_PATH }}.new' '${{ secrets.SERVER_PATH }}' && \
-             rm -rf '${{ secrets.SERVER_PATH }}.old' /tmp/yitaofu-deploy"
+            'bash -s' <<'REMOTE_SCRIPT'
+          set -euo pipefail
+
+          DEPLOY_PATH="${{ secrets.SERVER_PATH }}"
+          STAGING="${DEPLOY_PATH}.new"
+          BACKUP="${DEPLOY_PATH}.old"
+          ARCHIVE="/tmp/yitaofu-deploy.tar.gz"
+
+          echo "Preparing staging directory..."
+          rm -rf "$STAGING"
+          mkdir -p "$STAGING"
+
+          echo "Extracting archive..."
+          tar -xzf "$ARCHIVE" -C "$STAGING"
+
+          echo "Validating deployment..."
+          test -s "$STAGING/index.html"
+
+          FILE_COUNT=$(find "$STAGING" -type f | wc -l)
+          echo "Extracted files: $FILE_COUNT"
+
+          if [ "$FILE_COUNT" -lt 1 ]; then
+            echo "ERROR: Deployment contains no files."
+            exit 1
+          fi
+
+          echo "Switching production directory..."
+          rm -rf "$BACKUP"
+
+          if [ -d "$DEPLOY_PATH" ]; then
+            mv "$DEPLOY_PATH" "$BACKUP"
+          fi
+
+          if mv "$STAGING" "$DEPLOY_PATH"; then
+            echo "Deployment activated successfully."
+            rm -rf "$BACKUP" "$ARCHIVE" /tmp/yitaofu-deploy
+          else
+            echo "ERROR: Activation failed. Attempting rollback..."
+
+            if [ -d "$BACKUP" ]; then
+              mv "$BACKUP" "$DEPLOY_PATH"
+            fi
+
+            exit 1
+          fi
+          REMOTE_SCRIPT
