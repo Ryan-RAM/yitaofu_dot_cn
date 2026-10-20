@@ -54,7 +54,7 @@ const sortedNews = news.sort((a, b) =>
     }
     .news-item {
         display: grid;
-        grid-template-columns: 180px 1fr;
+        grid-template-columns: 150px 1fr;
         gap: 4rem;
         padding: 2rem 0;
         border-top: 1px solid #333;
@@ -63,13 +63,14 @@ const sortedNews = news.sort((a, b) =>
         border-bottom: 1px solid #333;
     }
     .news-date {
-        font-size: 1rem;
-        color: var(--text-muted);
+        font-size: 1.5rem;
+        color: var(--text-secondary);
     }
     .news-information h2 {
         margin: 0;
-        font-size: 1.7rem;
+        font-size: 1.5rem;
         font-weight: 300;
+        color: var(--text-primary);
     }
     .news-information a {
         color: inherit;
@@ -77,7 +78,7 @@ const sortedNews = news.sort((a, b) =>
     }
     .news-location {
         margin-top: 0.75rem;
-        font-size: 1rem;
+        font-size: 1.15rem;
         color: var(--text-secondary);
     }
     @media (max-width: 768px) {

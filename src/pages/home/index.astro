@@ -19,7 +19,7 @@ const latestProjects = projects
 ---
 
 
-<Layout title="Ryan Fu" fullWidth={true}>
+<Layout title="Home | Ryan Fu" fullWidth={true}>
     <!-- COVER STORY -->
     {
         latestCoverStory && (
@@ -28,6 +28,7 @@ const latestProjects = projects
                     <img
                         src={latestCoverStory.data.cover}
                         alt={latestCoverStory.data.title}
+                        fetchpriority="high"
                     />
                     <div class="cover-overlay"></div>
                     <div class="cover-information">
@@ -52,7 +53,7 @@ const latestProjects = projects
                 What's New
             </h2>
             <a href="/news">
-                Read More →
+                View All →
             </a>
         </div>
         <div class="news-list">
@@ -149,40 +150,40 @@ const latestProjects = projects
     }
     .cover-information {
         position: absolute;
-        right: 5rem;
-        bottom: 4rem;
+        right: 10rem;
+        bottom: 5rem;
         width: min(700px, 50%);
         text-align: right;
         z-index: 2;
     }
     .cover-category {
         margin-bottom: 1rem;
-        font-size: 0.9rem;
-        letter-spacing: 0.18em;
+        font-size: 1.15rem;
+        letter-spacing: 0.1em;
         color: var(--accent);
         font-weight: 600;
     }
     .cover-information h1 {
         margin: 0;
         font-size: clamp(2.5rem, 5vw, 5rem);
-        line-height: 1.05;
+        line-height: 1;
         font-weight: 300;
         color: #fff;
     }
     .cover-date {
         margin-top: 1rem;
-        font-size: 1rem;
+        font-size: 1.15rem;
         color: rgba(255, 255, 255, 0.7);
     }
     /* =========================
        SECTION COMMON
        ========================= */
     .whats-new {
-        padding: 0 5rem;
+        padding: 0 10rem;
         margin: 7rem 0 7rem;
     }
     .selected-portfolio {
-        padding: 0 5rem;
+        padding: 0 10rem;
         margin: 7rem 0 7rem;
     }
     .section-header {

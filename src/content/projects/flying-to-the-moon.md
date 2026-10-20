@@ -2,7 +2,7 @@
 
 title: Flying to the Moon
 
-subtitle: New type of Research Building Through WFC Algorithm
+subtitle: New Type of Research Building Through WFC Algorithm
 
 date: "2025.12"
 
