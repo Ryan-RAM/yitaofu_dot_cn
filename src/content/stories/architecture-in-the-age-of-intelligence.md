@@ -2,13 +2,13 @@
 
 title: "Architecture in the Age of Intelligence"
 
-date: "2026.08"
+date: "2026.09"
 
 category: Cover Story
 
-location: Guangzhou, China
+location: New York, NY, US
 
-cover: "/images/web/stories/2026-08.webp"
+cover: "/images/web/stories/2026-09.webp"
 
 intro:
   An exploration of how computational thinking and artificial intelligence may reshape architectural practice.
@@ -22,57 +22,63 @@ tags:
 
 ## Prologue
 
-序言：从一个更大的历史尺度切入：Architecture 从来不是单纯建造 shelter。
+I graduated in 2026. In the past five years, architecture school taught me how to organize a project and produce drawings that make sense, training me as a professional architect. Somewhere during those same five years, machines learned to do many of these, too. I noticed it gradually. First the rendering, and then the plans. Then the entire scheme, generated in an afternoon.
 
-每一次技术革命，都改变了建筑师与设计过程之间的关系：
+Where should we go from here? I don't have the answer yet. I want to ask it properly.
 
-> perspective → changed how architects imagined space
+## What the Machine Takes
 
-> descriptive geometry → transformed representation
+Let me be honest about how most of the designs are made. We look for precedents, save images, pin them to a board, and combine something new with familiar pieces. Learning from precedent is not a problem because most of us do that. But at some points, it becomes a loop — projects borrow from projects that borrowed from other projects.
 
-> CAD → transformed drawing
+That loop is exactly what machine learning is good at. It learns patterns from existing works and generates new combinations that look plausible. When a machine produces a convincing plan, it has just shown how much of design was recombination in the first place.
 
-> BIM → transformed information management
+I learned this through my own work. For a research center on the Moon, I defined rules for how rooms could connect and let an algorithm arrange them. For a design in flooded Tokyo, I used a slime mold, a creature living without a brain, to explore paths between towers. In both cases, forms emerged quickly, and both were shaped by what I had fed in, including rules, entities, functions, conditions, clients, and every detail that I imagined.
 
-> simulation → transformed prediction
+Machines are becoming capable of performing more tasks that once required human designers. But let's do a "subtraction": What remains of architecture if we take away everything that machines can do? This question has been asked before, even if never quite in this form.
 
-> AI → transforms intelligence itself
 
-核心论点：The next transformation of architecture is not about designing with new tools, but designing with a new form of intelligence.
+## History Repeats Itself
 
-Why intelligence becomes architecture's next medium
+The emergence of the architect as a distinct professional role was itself part of a larger transformation. In many traditions, design and construction were closely intertwined in the work of master builders. During the Renaissance and the centuries that followed, drawings and printed books made it possible to separate the idea from the making, and the architect became the person who represented a building without building it personally.
 
-## What is intelligence?
+In the nineteenth century, iron and glass came along and transformed construction, and engineers took on specialized roles in structural design. One of the most famous buildings, the Crystal Palace, was designed by Joseph Paxton, a gardener whose experience with greenhouses informed its design. Then modernism arrived. Architects started working with industrialization instead of resisting it, and housing for ordinary people became a central architectural concern.
 
-1. 我觉得是一种学习 思考 表达等一系列思维活动的能力限度 思维能力越高 智力也就越高 反之亦然
+Not long before I was born, Chinese design institutes underwent a transformation known as "Shuai Tu Ban" (甩图板), which means throwing away the drawing boards. People drawing by hand gave way to computational drafting within a few years. That was only one generation ago.
 
-## Has architecture always been intelligent?
+With each shift, some skills were taken away. What grew afterwards was a changing set of questions about what buildings should be. These transitions were not painless. People lost jobs, and professional roles were redefined.
 
-2. 建筑有智力 但更像是时代对建筑学专业的需求 使其让建筑从业者产生认知和思考
+Our current "subtraction" might be more radical. Many skills emerge at once, including not only technical production but also design itself. History cannot promise this transition will end well. It can only give us a place to begin asking what comes next.
 
-## What makes AI fundamentally different from previous architectural tools?
+## If the Machine Can Do Everything
+Let’s consider the hardest case. Imagine a machine that can do everything an architect does today, including site analysis, plans, details, drawings, even client meetings. If AI can replace us, why would we still do this work ourselves?
 
-3. 有自主性 哪怕像CAD这种都是要人操纵的 而AI可以做到无监督学习并生成一些成果
+Painting faced a similar challenge when photography emerged. The camera took over much of the work of recording, but painters did not disappear. They started to explore the experience of light, subjective perception, and abstraction. Painting did not beat the camera. It changed what painting meant.
 
-## What happens to authorship when machines participate in design?
+Sixty years ago, the architect Cedric Price was already wary of technology that arrives before anyone asked what it is for, and he believed buildings should leave room for doubt and change. It is undeniable that machines are remarkably good at answering questions. Give it a goal, and it will find a form that satisfies it. But choosing the goal is not merely a technical problem. It is a decision about what we value and what consequences we are willing to accept.
 
-4. 著作权归属还是在人 因为指令是人传出去的 机器只能负责执行 所谓的创作也是执行的结果
+> “Technology is the answer, but what was the question?” (Cedric Price, lecture, 1966)
 
-## What should architects do with AI beyond image generation?
+So the question for this generation is not whether the machine can design. The question is what we choose to do ourselves, and what we are willing to take responsibility for.
 
-5. 早在几年前 斯坦福的李飞飞团队提出了spatial intelligence的概念 我想这是除了图像这种2D媒介生成以外 另一个方向
+## IV. Where I Want to Go
 
-## What skills will define the architect of the future?
+Buildings are gradually becoming "intelligent". They are able to sense conditions and adjust their operation. Sensors can track occupancy, movement, temperature, and energy usage. In a way, buildings are becoming environments where machines can observe human behaviors and learn from data about how spaces are used.
 
-6. 驾驭AI的能力 由于AI生成的不确定性 我们需要做到设计方案可以按照我们想的方向走 而不可以让AI随便自己生成 所以建筑专业人员需要了解AI的架构 原理等 单纯靠空间创造和集合构成过活的时代已经结束了
+This changes what architects design. Not only walls and rooms, but also the relationships between people and the intelligence around them. What should a building notice, and what should it ignore? When should it adapt to us? When should it leave us alone? Whom should it serve when the goal of its users and its owners are different?
 
-## What kind of architecture becomes possible when intelligence itself becomes a design material?
+In the 1960s, Gordon Pask imagined a building as a system in conversation with its users. Today, technologies gradually make responsive environments possible. However, the question of how such a conversation should work remains open, and it still needs someone to design its rules and its manners.
 
-7. 我觉得是一种交互型建筑 通过AI对建筑进行监测 并实时进行一些数据配置的调整 比如电梯运行效率 通过人的动作识别来判断热舒适度 从而调整遮阳和温度 等等
+When I designed the research base on the Moon, the most important rule was not about form, but about a boundary: the airlock connects the pressurized interior to the exterior. It seems everything could be generated by the algorithm, except this boundary. This is the kind of work that remains — deciding where the interior is, and what it should feel like to be there.
 
-## Epilogue
+## What I Believe for Now
 
-Architecture will no longer only represent human intelligence.
-It will become an ecosystem where multiple forms of intelligence coexist.
+1. Much of what we called design was recombination. The machine just made it visible.
+2. I will not build my career on what machines cannot do. That line keeps moving.
+3. Every new technology has taken a skill from architecture. None has taken the question of what buildings are for.
+4. The machine is good at answers. Choosing the question is still our work.
+5. As buildings become intelligent, the architect designs not only spaces, but the relationship between people and the intelligence around them.
+6. Someone still has to decide where the inside is, and answer for it.
 
-![Drawing](/images/web/projects/flying-to-the-moon/cover.webp)
+And one thing I still don't know:
+
+*If one day the machine can choose the question, define the boundaries, or even challenge the goals we give it, where will we go then?*

@@ -52,7 +52,7 @@ blocks:
 
     title: Location
 
-    content: The site for this project is located on the coast of Tokyo, Japan -- an area severely affected by tsunamis and highly vulnerable to such disasters. When a tsunami inundates the ground level, high-rise buildings become isolated islands, severely hampering rescue operations鈥攁 challenge that has consistently plagued disaster relief efforts in the past.
+    content: The site for this project is located on the coast of Tokyo, Japan -- an area severely affected by tsunamis and highly vulnerable to such disasters. When a tsunami inundates the ground level, high-rise buildings become isolated islands, severely hampering rescue operations challenge that has consistently plagued disaster relief efforts in the past.
 
   - type: split
 
